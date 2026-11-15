@@ -456,5 +456,45 @@ SIMS.regionquiz=el=>{
   gen();
 };
 
+/* ---- Rectificador de media onda con diodo, paso a paso: Vm = Vs − Vγ, Vdc = Vm/π ---- */
+SIMS.mediaOndaPaso=el=>build(el,{w:660,h:400,
+ sliders:[{k:'paso',v:0,min:0,max:6,step:1,l:'paso de la resolución (0 = problema)',u:''}],
+ draw(a){a.clear();const p=a.st.paso;const g=a.g;
+  const X0=60,X1=620,Y0=180,SC=100/12;          // 12 V de pico = 100 px
+  const X=th=>X0+(X1-X0)*th/(2*Math.PI), Y=v=>Y0-SC*v;
+  const Vs=th=>12*Math.sin(th), Vo=th=>Math.max(Vs(th)-0.7,0);
+  // ejes
+  a.line(X0,Y0,X1,Y0,C.muted,1);
+  a.line(X0,Y(14),X0,Y(-14),C.muted,1);
+  a.txt('0',X0-8,Y0+4,C.muted,11,'right');a.txt('ωt',X1+4,Y0+4,C.muted,11,'left');
+  // entrada (discontinua) y salida
+  const curve=(f,col,dash)=>{g.strokeStyle=col;g.lineWidth=2;g.setLineDash(dash||[]);g.beginPath();
+    for(let th=0;th<=2*Math.PI+0.0001;th+=0.03){const x=X(th),y=Y(f(th));th===0?g.moveTo(x,y):g.lineTo(x,y);}
+    g.stroke();g.setLineDash([]);};
+  curve(Vs,C.muted,[5,4]);
+  if(p>=1)curve(Vo,C.f,null);
+  a.txt('vs = 12 sen ωt',X1-110,Y(12)-8,C.muted,12,'left');
+  if(p>=1)a.txt('vo',X(Math.PI/2)+6,Y(11.3)-8,C.f,13,'left');
+  if(p>=4){g.strokeStyle=C.d;g.lineWidth=1.5;g.setLineDash([6,4]);g.beginPath();g.moveTo(X0,Y(3.6));g.lineTo(X1,Y(3.6));g.stroke();g.setLineDash([]);
+    a.txt('Vdc = 3,6 V',X1-80,Y(3.6)-8,C.d,12,'left');}
+  // desarrollo
+  if(p>=1)a.txt('vo = vs − 0,7 V en el semiciclo positivo; vo = 0 en el negativo',X0,300,C.text,12,'left');
+  if(p>=2)a.txt('Vm,salida = 12 − 0,7 = 11,3 V',X0,318,C.text,13,'left');
+  if(p>=3)a.txt('I_max = 11,3 V / 1 kΩ = 11,3 mA',X0,336,C.text,13,'left');
+  if(p>=4)a.txt('Vdc = Vm/π = 11,3/π = 3,60 V',X0,354,C.d,14,'left');
+  if(p>=5)a.txt('Idc = Vdc/R = 3,60 mA',X0,372,C.d,13,'left');
+  if(p>=6)a.txt('PIV ≈ 12 V: en el semiciclo negativo el diodo bloquea toda la tensión',X0,390,C.a,12,'left');
+  const T=[
+   'Rectificador de media onda: entrada vs = 12 sen ωt V, resistencia de carga R = 1 kΩ y diodo con caída Vγ = 0,7 V. Se piden la tensión media de salida, la corriente y la tensión inversa de pico que debe soportar el diodo.',
+   'El diodo conduce solo cuando vs supera 0,7 V. En el semiciclo positivo la salida sigue a la entrada menos 0,7 V; en el negativo el diodo está en corte y vo = 0.',
+   'La tensión de pico de salida es Vm = 12 − 0,7 = 11,3 V. La caída del diodo se resta en el pico, no en todos los instantes del semiciclo.',
+   'Corriente de pico: I_max = Vm/R = 11,3 V / 1 kΩ = 11,3 mA, que es también la corriente del diodo en el instante del pico.',
+   'Valor medio: un semiciclo de senoide tiene media Vm/π, así que Vdc = 11,3/π = 3,60 V. La línea discontinua roja marca ese nivel medio.',
+   'Corriente media: Idc = Vdc/R = 3,60 V / 1 kΩ = 3,60 mA. Es la corriente que realmente entrega el rectificador a la carga.',
+   'Tensión inversa de pico: cuando vs es negativa, el diodo bloquea, y su tensión inversa llega a ser casi 12 V. Ese es el valor que hay que comparar con el de la hoja de características. Comprobación: Vdc < Vm, como debe ser.'
+  ];
+  a.html(`<div>${T[p]}</div>`);
+ }});
+
 document.querySelectorAll('[data-sim]').forEach(el=>{const f=SIMS[el.dataset.sim];if(f)f(el);});
 })();
