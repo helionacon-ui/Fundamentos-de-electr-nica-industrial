@@ -17,24 +17,64 @@
 <style id="lectura">
 @media screen{
 :root{--body:"Atkinson Hyperlegible Next","Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif}
-body{font-family:var(--body);font-size:20.5px;line-height:2.1;letter-spacing:.022em;word-spacing:.09em}
-p{margin:0 0 1.75em}
-li{margin:.8em 0}
-p,li{max-width:62ch}
+body{font-family:var(--body);font-size:20px;line-height:1.95;letter-spacing:.014em;word-spacing:.05em}
+p{margin:0 0 1.5em;max-width:64ch;hyphens:auto;-webkit-hyphens:auto}
+li{margin:.72em 0;max-width:64ch}
 .box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:0}
-h2{margin-top:92px;margin-bottom:24px;line-height:1.3}
-h3{font-size:24px;margin:58px 0 18px;line-height:1.35}
-h4{margin-top:34px;margin-bottom:10px}
-.box{padding:24px 30px;margin:32px 0}
-table{font-size:18px;line-height:1.75}
-td,th{padding-top:.85em;padding-bottom:.85em}
-figure.fig figcaption{font-size:17px;line-height:1.8;margin-top:12px}
+h2{margin-top:92px;margin-bottom:22px;line-height:1.25}
+h3{font-size:25px;margin:66px 0 20px;line-height:1.3}
+h4{margin:38px 0 12px;line-height:1.4}
+/* ---- entradilla con capitular ---- */
+.zero .lede{font-size:1.05em;line-height:1.86;text-align:left}
+.zero .lede::first-letter{float:left;font-size:3.05em;line-height:.84;font-weight:700;padding:.06em .14em 0 0;color:var(--tc,var(--accent))}
+/* ---- sumario del tema ---- */
+p.obj{max-width:none;text-align:left;margin:0 0 1.7em;padding:14px 20px;border-radius:10px;
+ background:color-mix(in srgb,var(--surface) 62%,transparent);
+ border-left:3px solid var(--tc,var(--accent));font-size:.95em;line-height:1.75}
+p.obj>b:first-child{display:block;font:700 11.5px/1.7 var(--mono,monospace);letter-spacing:.1em;
+ text-transform:uppercase;color:var(--tc,var(--accent))}
+/* ---- términos con entrada, al modo de un manual ---- */
+p.run{margin:0 0 1.38em}
+p.run>b:first-child{display:block;font:700 12px/1.7 var(--mono,monospace);letter-spacing:.09em;
+ text-transform:uppercase;color:var(--tc,var(--accent))}
+/* ---- rótulos internos ---- */
+.zero>.ft{font:700 11.5px/1.6 var(--mono,monospace);letter-spacing:.1em;text-transform:uppercase}
+.zero>.ft:not(:first-child){margin-top:2em;font-size:12.5px;color:var(--fg);opacity:.72}
+/* ---- desarrollo teórico ---- */
+.deep h4{position:relative;padding-left:2.35em;font-size:1.03em}
+.deep h4 .hn{position:absolute;left:0;top:.06em;font:700 .84em/1.7 var(--mono,monospace);
+ color:var(--tc,var(--accent));opacity:.8}
+.deep>h4:not(:first-child){border-top:1px solid var(--line);padding-top:30px;margin-top:42px}
+.eqd{margin:1.65em 0;text-align:center;overflow-x:auto;overflow-y:hidden}
+/* ---- notas al margen, sin duplicar el rótulo ---- */
+.box.deepnote{padding:15px 20px;margin:1.5em 0;border-radius:0 10px 10px 0;
+ background:color-mix(in srgb,var(--surface) 76%,transparent)}
+.box.key.deepnote::before,.box.trap.deepnote::before{content:none}
+.box.deepnote>b:first-child{display:block;font:700 11.5px/1.7 var(--mono,monospace);
+ letter-spacing:.1em;text-transform:uppercase;color:var(--tc,var(--accent))}
+.box.trap.deepnote>b:first-child{color:var(--warn)}
+/* ---- resto ---- */
+.box{padding:22px 28px;margin:30px 0}
+table{font-size:18px;line-height:1.7}
+td,th{padding-top:.8em;padding-bottom:.8em}
+figure.fig figcaption{font-size:17px;line-height:1.78;margin-top:12px}
 figure.fig{margin-block:34px}
-.lede{line-height:1.85}
 .toc a{font-size:15.5px;padding:8px 0 8px 10px}
 svg,svg text,canvas,.katex,mjx-container{letter-spacing:normal;word-spacing:normal}
+mjx-container[display]{margin:0!important}
 details>summary{line-height:1.7;padding-block:.5em}
-@media (max-width:600px){body{font-size:19px;line-height:2}}
+.enun p,.inner p{text-align:left}
+@media (min-width:1040px){
+p,li{text-align:justify}
+.zero .lede,.enun p,.inner p,figcaption,.ft{text-align:left}
+}
+@media (max-width:600px){
+body{font-size:18.5px;line-height:1.9}
+p{text-align:left}
+.zero .lede::first-letter{font-size:2.6em}
+.deep h4{padding-left:0}
+.deep h4 .hn{position:static;margin-right:.5em}
+}
 }
 </style>
 </head>
@@ -46,41 +86,41 @@ details>summary{line-height:1.7;padding-block:.5em}
 <main>
 <section class="sec tema" style="--tc:var(--c7);--tcs:var(--c7s)">
 <div class="sh"><span aria-hidden="true" class="badge">6</span><div class="shx"><p class="kick">Electrónica digital · Tema 6</p><h2 id="t6">Introducción a la electrónica digital</h2><div class="tags"><span class="tag">Electrónica digital</span><span class="tag">Unidad 2 del temario oficial</span></div></div></div>
-<div class="zero"><p class="ft">Desde cero</p><p><b>Objetivo:</b> pasar de la electrónica analógica a la digital: numeración binaria, álgebra de Boole, puertas lógicas, simplificación por Karnaugh y los bloques combinacionales y secuenciales básicos. Es la unidad 2 del temario oficial.</p>
-<p>En analógica la señal vale cualquier cosa; en <b>digital</b> solo dos valores, que se asocian a dos márgenes de tensión. Todo lo intermedio es zona prohibida. A cambio de perder resolución se gana <b>inmunidad al ruido</b>: una señal degradada se regenera, cosa imposible en analógica.</p>
-<p><b>Numeración:</b> binario, octal y hexadecimal. Para convertir decimal a binario, divisiones sucesivas entre 2 leyendo los restos de abajo arriba. Los negativos se representan en <b>complemento a dos</b>: se invierten los bits y se suma 1.</p>
-<p><b>Álgebra de Boole:</b> tres operaciones (AND ·, OR +, NOT ‾) y un puñado de propiedades. Las dos que más se usan son la absorción \(A+AB=A\) y las <b>leyes de De Morgan</b>: \(\overline{A\cdot B}=\bar A+\bar B\) y \(\overline{A+B}=\bar A\cdot\bar B\).</p>
-<p><b>Puertas:</b> AND, OR, NOT, NAND, NOR, XOR y XNOR. NAND y NOR son <b>universales</b>: con una sola de ellas se construye cualquier función.</p>
-<p><b>Simplificación:</b> tabla de verdad → suma de productos → mapa de Karnaugh → expresión mínima → circuito. Es la secuencia completa de un problema de examen.</p>
+<div class="zero"><p class="ft">Desde cero</p><p class="obj"><b>Objetivo:</b> pasar de la electrónica analógica a la digital: numeración binaria, álgebra de Boole, puertas lógicas, simplificación por Karnaugh y los bloques combinacionales y secuenciales básicos. Es la unidad 2 del temario oficial.</p>
+<p class="lede">En analógica la señal vale cualquier cosa; en <b>digital</b> solo dos valores, que se asocian a dos márgenes de tensión. Todo lo intermedio es zona prohibida. A cambio de perder resolución se gana <b>inmunidad al ruido</b>: una señal degradada se regenera, cosa imposible en analógica.</p>
+<p class="run"><b>Numeración:</b> binario, octal y hexadecimal. Para convertir decimal a binario, divisiones sucesivas entre 2 leyendo los restos de abajo arriba. Los negativos se representan en <b>complemento a dos</b>: se invierten los bits y se suma 1.</p>
+<p class="run"><b>Álgebra de Boole:</b> tres operaciones (AND ·, OR +, NOT ‾) y un puñado de propiedades. Las dos que más se usan son la absorción \(A+AB=A\) y las <b>leyes de De Morgan</b>: \(\overline{A\cdot B}=\bar A+\bar B\) y \(\overline{A+B}=\bar A\cdot\bar B\).</p>
+<p class="run"><b>Puertas:</b> AND, OR, NOT, NAND, NOR, XOR y XNOR. NAND y NOR son <b>universales</b>: con una sola de ellas se construye cualquier función.</p>
+<p class="run"><b>Simplificación:</b> tabla de verdad → suma de productos → mapa de Karnaugh → expresión mínima → circuito. Es la secuencia completa de un problema de examen.</p>
 </div>
 <details class="nom"><summary><span aria-hidden="true" class="nom-ic">Aa</span>Nomenclatura del tema 6 <span class="src">6 símbolos</span></summary><div class="inner">
 <div class="tw"><table><tr><th>Símbolo</th><th>Qué significa</th><th>Unidades · ejemplo</th></tr><tr><td class="sym">0 / 1</td><td>Niveles lógicos bajo y alto</td><td class="u">TTL: &lt;0,8 V y &gt;2,0 V</td></tr><tr><td class="sym">·  +  ‾</td><td>AND, OR, NOT</td><td class="u">operaciones booleanas</td></tr><tr><td class="sym">⊕</td><td>XOR, o-exclusiva</td><td class="u">vale 1 si las entradas difieren</td></tr><tr><td class="sym">m_i / M_i</td><td>Minitérmino y maxitérmino</td><td class="u">fila i de la tabla de verdad</td></tr><tr><td class="sym">X</td><td>Condición indiferente (don&#8217;t care)</td><td class="u">se usa como 0 o 1 en Karnaugh</td></tr><tr><td class="sym">Fan-out</td><td>Puertas que puede atacar una salida</td><td class="u">TTL ≈ 10</td></tr></table></div></div></details>
-<!--amp1--><div class="zero" style="margin-top:14px"><p class="ft">Explicación ampliada</p><p class="ft">Por qué el mundo se pasó a digital</p><p>Una señal analógica que recorre un cable acumula ruido, y ese ruido ya no se puede quitar: forma parte de la señal. En digital, mientras el ruido no saque al nivel de su margen, el receptor <b>regenera</b> el valor exacto, 0 o 1, y el error desaparece.</p>
+<!--amp1--><div class="zero" style="margin-top:14px"><p class="ft">Explicación ampliada</p><p class="ft">Por qué el mundo se pasó a digital</p><p class="lede">Una señal analógica que recorre un cable acumula ruido, y ese ruido ya no se puede quitar: forma parte de la señal. En digital, mientras el ruido no saque al nivel de su margen, el receptor <b>regenera</b> el valor exacto, 0 o 1, y el error desaparece.</p>
 <p>Eso se paga con el <b>margen de ruido</b>: la diferencia entre lo que una puerta garantiza a la salida y lo que exige a la entrada. En TTL, la salida alta garantiza al menos 2,4 V y la entrada acepta desde 2,0 V: hay 0,4 V de margen. Si el ruido supera esa cifra, el sistema falla de golpe, no poco a poco: es la otra cara de la moneda.</p>
 <p class="ft">El camino de un problema de combinacional</p><ol class="pasos"><li><b>Enunciado → tabla de verdad.</b> Una fila por combinación de entradas; con \(n\) entradas hay \(2^n\) filas.</li><li><b>Tabla → suma de productos.</b> Un minitérmino por cada fila que vale 1.</li><li><b>Karnaugh.</b> Se vuelca la tabla en el mapa y se agrupan unos adyacentes en bloques de tamaño potencia de 2, lo más grandes posible.</li><li><b>Expresión mínima.</b> Cada grupo es un producto: se quedan las variables que no cambian dentro del grupo.</li><li><b>Circuito.</b> Y, si piden NAND exclusivamente, se aplica De Morgan al resultado.</li></ol>
 <div class="box trap deepnote"><b>Cuidado.</b> En el mapa de Karnaugh las columnas van en código Gray (00, 01, 11, 10), <b>no</b> en binario natural. Si se ordenan 00, 01, 10, 11 las casillas adyacentes dejan de diferir en un solo bit y las agrupaciones salen mal. Es el fallo clásico.</div>
 </div><!--/amp1--><!--deep--><h3 id="t6-profundiza">Desarrollo teórico a fondo</h3><div class="deep">
-<h4>1. Sistemas de numeración y códigos</h4>
+<h4><span class="hn">1</span>Sistemas de numeración y códigos</h4>
 <p>La conversión de decimal a binario se hace por divisiones sucesivas entre 2, leyendo los restos del último al primero. La inversa, multiplicando cada bit por su peso \(2^k\).</p>
 <ul><li><b>Hexadecimal</b> es solo una taquigrafía del binario: cada dígito hex son 4 bits exactos, así que se pasa de uno a otro agrupando de cuatro en cuatro, sin cuentas.</li><li><b>BCD:</b> cada dígito decimal se codifica con 4 bits por separado. Se usa en displays y relojes, porque facilita mostrar el número, aunque desperdicia combinaciones.</li><li><b>Código Gray:</b> dos valores consecutivos difieren en un solo bit. Se usa en encoders de posición para que un error de lectura entre dos posiciones nunca dé un salto grande.</li></ul>
 <p><b>Complemento a dos</b> para números con signo: se invierten todos los bits y se suma 1. Su ventaja es que la resta se hace con el mismo sumador que la suma, sin circuito aparte.</p>
 <div class="eqd">\[-N = \overline{N} + 1 \qquad\text{(en } n \text{ bits)}\]</div>
 <div class="box key deepnote"><b>Idea clave.</b> con \(n\) bits en complemento a dos el rango es de \(-2^{n-1}\) a \(+2^{n-1}-1\): con 8 bits, de −128 a +127. El rango es asimétrico, y ese detalle es fuente de errores en programación.</div>
-<h4>2. Álgebra de Boole</h4>
+<h4><span class="hn">2</span>Álgebra de Boole</h4>
 <div class="tw"><table><tr><th>Propiedad</th><th>Forma AND</th><th>Forma OR</th></tr><tr><td>Identidad</td><td>A·1 = A</td><td>A+0 = A</td></tr><tr><td>Elemento nulo</td><td>A·0 = 0</td><td>A+1 = 1</td></tr><tr><td>Idempotencia</td><td>A·A = A</td><td>A+A = A</td></tr><tr><td>Complemento</td><td>A·Ā = 0</td><td>A+Ā = 1</td></tr><tr><td>Absorción</td><td>A·(A+B) = A</td><td>A+A·B = A</td></tr><tr><td>De Morgan</td><td>‾(A·B) = Ā+B̄</td><td>‾(A+B) = Ā·B̄</td></tr></table></div><p>Todas las propiedades vienen por <b>pares duales</b>: cambiando AND por OR y 0 por 1 se pasa de una a la otra. Eso permite memorizar la mitad.</p>
 <div class="box key deepnote"><b>Idea clave.</b> <b>De Morgan</b> es la herramienta práctica del tema: sirve para convertir cualquier circuito a NAND, que es lo que de verdad se fabrica, y para simplificar expresiones con barras largas. En palabras: «la barra se parte y el signo cambia».</div>
-<h4>3. Puertas lógicas y universalidad</h4>
+<h4><span class="hn">3</span>Puertas lógicas y universalidad</h4>
 <div class="tw"><table><tr><th>Puerta</th><th>Salida 1 cuando…</th><th>Expresión</th></tr><tr><td>AND</td><td>todas las entradas son 1</td><td>A·B</td></tr><tr><td>OR</td><td>alguna entrada es 1</td><td>A+B</td></tr><tr><td>NAND</td><td>alguna entrada es 0</td><td>‾(A·B)</td></tr><tr><td>NOR</td><td>todas son 0</td><td>‾(A+B)</td></tr><tr><td>XOR</td><td>las entradas difieren</td><td>A⊕B</td></tr><tr><td>XNOR</td><td>las entradas coinciden</td><td>‾(A⊕B)</td></tr></table></div><p>La <b>NAND es universal</b>: con ella sola se hacen las demás.</p>
 <ul><li>NOT: las dos entradas de la NAND unidas.</li><li>AND: una NAND seguida de otra como inversor.</li><li>OR: invertir las dos entradas y meterlas a una NAND (De Morgan).</li></ul>
 <p>Esto no es una curiosidad académica: los circuitos integrados reales se fabrican con NAND y NOR porque en tecnología CMOS son las más sencillas y rápidas, con menos transistores que una AND o una OR.</p>
-<h4>4. Mapas de Karnaugh</h4>
+<h4><span class="hn">4</span>Mapas de Karnaugh</h4>
 <ol class="pasos"><li>Dibuja el mapa con las variables en código <b>Gray</b> (00, 01, 11, 10).</li><li>Rellena con los valores de la tabla de verdad.</li><li>Agrupa los unos en rectángulos de 1, 2, 4, 8… casillas. Los grupos pueden <b>solaparse</b> y el mapa se cierra sobre sí mismo (los bordes son adyacentes, y también las cuatro esquinas).</li><li>Haz los grupos <b>lo más grandes posible</b> y usa los menos grupos que cubran todos los unos.</li><li>Cada grupo da un producto con las variables que <b>no cambian</b> dentro de él.</li></ol>
 <div class="box key deepnote"><b>Idea clave.</b> cada vez que un grupo duplica su tamaño, desaparece una variable del producto. Un grupo de cuatro casillas en un mapa de cuatro variables deja un producto de dos literales.</div>
 <p>Las <b>condiciones indiferentes</b> (X) se usan como comodines: se toman como 1 si ayudan a agrandar un grupo y como 0 si no. Aprovecharlas bien es lo que separa una solución correcta de la mínima.</p>
 <div class="box trap deepnote"><b>Cuidado.</b> Con más de cuatro variables Karnaugh se vuelve impracticable y se pasa al método de Quine-McCluskey o a una herramienta software. En examen rara vez pasan de cuatro.</div>
-<h4>5. Bloques combinacionales</h4>
+<h4><span class="hn">5</span>Bloques combinacionales</h4>
 <ul><li><b>Codificador:</b> \(2^n\) entradas → \(n\) salidas. Con <b>prioridad</b> si puede haber varias activas a la vez.</li><li><b>Decodificador:</b> \(n\) entradas → \(2^n\) salidas, solo una activa. El clásico es el BCD a 7 segmentos.</li><li><b>Multiplexor:</b> elige una de \(2^n\) entradas con \(n\) líneas de selección. Sirve además como <b>generador de funciones</b>: cualquier función de \(n\) variables se implementa con un MUX de \(n\) selectores.</li><li><b>Demultiplexor:</b> la operación inversa.</li><li><b>Sumador:</b> el semisumador da \(S=A\oplus B\) y \(C=A\cdot B\); el sumador completo añade el acarreo de entrada. Encadenando \(n\) se suma en \(n\) bits.</li><li><b>Comparador:</b> salidas de mayor, menor e igual.</li></ul>
-<h4>6. Primer vistazo a lo secuencial</h4>
+<h4><span class="hn">6</span>Primer vistazo a lo secuencial</h4>
 <p>Un circuito <b>combinacional</b> depende solo de las entradas actuales. Uno <b>secuencial</b> recuerda: su salida depende también del estado anterior. El elemento de memoria básico es el biestable.</p>
 <ul><li><b>Latch SR:</b> dos NAND realimentadas. Set pone a 1, Reset a 0, y la combinación de ambas a la vez está <b>prohibida</b>.</li><li><b>Flip-flop D:</b> copia la entrada en el flanco de reloj. Es el que se usa en la práctica para registros.</li><li><b>Flip-flop JK:</b> con J = K = 1 conmuta en cada flanco; sirve para contadores.</li></ul>
 <p>Con flip-flops en cadena se construyen <b>registros de desplazamiento</b> y <b>contadores</b>, que son la base de cualquier sistema digital con temporización.</p>
