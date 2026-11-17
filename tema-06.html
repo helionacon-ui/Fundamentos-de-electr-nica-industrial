@@ -124,6 +124,7 @@ mjx-container:not([display="true"]){padding:.2em .32em}
 <div class="box trap deepnote"><b>Cuidado.</b> En el mapa de Karnaugh las columnas van en código Gray (00, 01, 11, 10), <b>no</b> en binario natural. Si se ordenan 00, 01, 10, 11 las casillas adyacentes dejan de diferir en un solo bit y las agrupaciones salen mal. Es el fallo clásico.</div>
 </div><!--/amp1--><!--manim:fei-t6--><figure class="fig manim-fig" id="anim-fei-t6"><p class="ft">Animación · Cronograma de puertas lógicas</p><div class="manim" data-anim="fei-t6"><p class="muted">Activa JavaScript para ver la animación.</p></div><figcaption>Se reproduce sola al llegar a ella. Puedes pausarla, arrastrar la barra para ir a cualquier instante y cambiar la velocidad. Si aparece «Prueba tú», mueve ese control para fijar tú el parámetro.</figcaption></figure><!--/manim-->
 <!--deep--><h3 id="t6-profundiza">Desarrollo teórico a fondo</h3><div class="deep">
+<!--manim:fei-t6b--><figure class="fig manim-fig" id="anim-fei-t6b"><p class="ft">Animación · De analógico a digital</p><div class="manim" data-anim="fei-t6b"><p class="muted">Activa JavaScript para ver la animación.</p></div><figcaption>Se reproduce sola al llegar a ella. Puedes pausarla, arrastrar la barra para ir a cualquier instante y cambiar la velocidad. Si aparece «Prueba tú», mueve ese control para fijar tú el parámetro.</figcaption></figure><!--/manim-->
 <h4><span class="hn">1</span>Sistemas de numeración y códigos</h4>
 <p>La conversión de decimal a binario se hace por divisiones sucesivas entre 2, leyendo los restos del último al primero. La inversa, multiplicando cada bit por su peso \(2^k\).</p>
 <ul><li><b>Hexadecimal</b> es solo una taquigrafía del binario: cada dígito hex son 4 bits exactos, así que se pasa de uno a otro agrupando de cuatro en cuatro, sin cuentas.</li><li><b>BCD:</b> cada dígito decimal se codifica con 4 bits por separado. Se usa en displays y relojes, porque facilita mostrar el número, aunque desperdicia combinaciones.</li><li><b>Código Gray:</b> dos valores consecutivos difieren en un solo bit. Se usa en encoders de posición para que un error de lectura entre dos posiciones nunca dé un salto grande.</li></ul>
@@ -161,7 +162,7 @@ mjx-container:not([display="true"]){padding:.2em .32em}
 </div>
 <script src="app.js"></script>
 <script src="sims.js"></script>
-<script src="anim-manim.js?v=26804" defer></script>
-<script src="anim-temas.js?v=26804" defer></script>
+<script src="anim-manim.js?v=27685" defer></script>
+<script src="anim-temas.js?v=27685" defer></script>
 </body>
 </html>
