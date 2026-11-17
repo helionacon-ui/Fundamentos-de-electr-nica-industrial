@@ -55,4 +55,8 @@ M.reg('fei-t1',M.base({title:'Ley de Ohm y divisor de tensión',H:580,dur:18,cap
   var bx=530,by=y0,bh=y1-y0;D.rect(bx,by,40,bh,C.grid,null,1.2);D.rect(bx,by+bh*(1-V2/V),40,bh*V2/V,null,RG(C.hl,.55));D.rect(bx,by,40,bh*(1-V2/V),null,RG(C.f,.35));
   D.text('V₁',bx+48,by+bh*(1-V2/V)/2+5,{s:15,c:C.f});D.text('V₂',bx+48,by+bh*(1-V2/V/2)+5,{s:15,c:C.hl});
   U.readout(D,['I = 12/(4,7 + '+nf(R2,1)+') = '+nf(I,2)+' mA','V₁ = I·R₁ = '+nf(I*R1,2)+' V     V₂ = I·R₂ = '+nf(V2,2)+' V'],460);}));
+M.reg('fei-t4b',M.traza({title:'MOSFET: corriente de drenador frente a V_{GS}',H:560,dur:16,x0:0,x1:5,ax:{xr:[0,5.2],yr:[0,40],xt:[1,2,3,4,5],yt:[10,20,30,40],xd:0,yd:0,xl:'V_{GS} (V)',yl:'I_{D} (mA)'},h:300,f:function(v){return v<2?0:5*Math.pow(v-2,2);},
+ extra:function(D,A){D.line(A.X(2),A.Y(0),A.X(2),A.Y(40),C.hl,1.2,[4,4]);D.text('V_{th} = 2 V',A.X(2)+6,A.Y(37),{s:14,c:C.hl});},
+ read:function(v){return ['V_{GS} = '+nf(v,2)+' V    '+(v<2?'corte: I_{D} = 0':'saturación: I_{D} = k(V_{GS} − V_{th})²'),'I_{D} = '+nf(v<2?0:5*Math.pow(v-2,2),1)+' mA    (k = 5 mA/V²)'];},
+ caps:[[5,'El MOSFET de enriquecimiento no conduce hasta que la tensión puerta-fuente supera el umbral V<sub>th</sub>: forma el canal.'],[10,'En saturación la corriente crece con el cuadrado del exceso sobre el umbral: <i>I<sub>D</sub> = k(V<sub>GS</sub> − V<sub>th</sub>)²</i>.'],[99,'La puerta está aislada: no consume corriente en continua. Por eso el MOSFET se controla por tensión y es ideal como interruptor.']]}));
 })();
