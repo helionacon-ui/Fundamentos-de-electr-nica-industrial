@@ -122,7 +122,8 @@ mjx-container:not([display="true"]){padding:.2em .32em}
 <p>Eso se paga con el <b>margen de ruido</b>: la diferencia entre lo que una puerta garantiza a la salida y lo que exige a la entrada. En TTL, la salida alta garantiza al menos 2,4 V y la entrada acepta desde 2,0 V: hay 0,4 V de margen. Si el ruido supera esa cifra, el sistema falla de golpe, no poco a poco: es la otra cara de la moneda.</p>
 <p class="ft">El camino de un problema de combinacional</p><ol class="pasos"><li><b>Enunciado → tabla de verdad.</b> Una fila por combinación de entradas; con \(n\) entradas hay \(2^n\) filas.</li><li><b>Tabla → suma de productos.</b> Un minitérmino por cada fila que vale 1.</li><li><b>Karnaugh.</b> Se vuelca la tabla en el mapa y se agrupan unos adyacentes en bloques de tamaño potencia de 2, lo más grandes posible.</li><li><b>Expresión mínima.</b> Cada grupo es un producto: se quedan las variables que no cambian dentro del grupo.</li><li><b>Circuito.</b> Y, si piden NAND exclusivamente, se aplica De Morgan al resultado.</li></ol>
 <div class="box trap deepnote"><b>Cuidado.</b> En el mapa de Karnaugh las columnas van en código Gray (00, 01, 11, 10), <b>no</b> en binario natural. Si se ordenan 00, 01, 10, 11 las casillas adyacentes dejan de diferir en un solo bit y las agrupaciones salen mal. Es el fallo clásico.</div>
-</div><!--/amp1--><!--deep--><h3 id="t6-profundiza">Desarrollo teórico a fondo</h3><div class="deep">
+</div><!--/amp1--><!--manim:fei-t6--><figure class="fig manim-fig" id="anim-fei-t6"><p class="ft">Animación · Cronograma de puertas lógicas</p><div class="manim" data-anim="fei-t6"><p class="muted">Activa JavaScript para ver la animación.</p></div><figcaption>Se reproduce sola al llegar a ella. Puedes pausarla, arrastrar la barra para ir a cualquier instante y cambiar la velocidad.</figcaption></figure><!--/manim-->
+<!--deep--><h3 id="t6-profundiza">Desarrollo teórico a fondo</h3><div class="deep">
 <h4><span class="hn">1</span>Sistemas de numeración y códigos</h4>
 <p>La conversión de decimal a binario se hace por divisiones sucesivas entre 2, leyendo los restos del último al primero. La inversa, multiplicando cada bit por su peso \(2^k\).</p>
 <ul><li><b>Hexadecimal</b> es solo una taquigrafía del binario: cada dígito hex son 4 bits exactos, así que se pasa de uno a otro agrupando de cuatro en cuatro, sin cuentas.</li><li><b>BCD:</b> cada dígito decimal se codifica con 4 bits por separado. Se usa en displays y relojes, porque facilita mostrar el número, aunque desperdicia combinaciones.</li><li><b>Código Gray:</b> dos valores consecutivos difieren en un solo bit. Se usa en encoders de posición para que un error de lectura entre dos posiciones nunca dé un salto grande.</li></ul>
@@ -160,5 +161,7 @@ mjx-container:not([display="true"]){padding:.2em .32em}
 </div>
 <script src="app.js"></script>
 <script src="sims.js"></script>
+<script src="anim-manim.js?v=20372" defer></script>
+<script src="anim-temas.js?v=20372" defer></script>
 </body>
 </html>
